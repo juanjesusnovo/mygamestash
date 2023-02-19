@@ -1,3 +1,6 @@
+#Rest Api
+https://restapigames-production.up.railway.app/api/v1/
+al final se puede poner games/users
 # base
 
 ## Project setup

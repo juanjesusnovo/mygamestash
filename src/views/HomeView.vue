@@ -43,7 +43,6 @@
 <script>
 
 import axios from "axios"
-/* import { api } from "@/helpers/helper" */
 const api = "https://restapigames-production.up.railway.app/api/v1/"
 
 export default {

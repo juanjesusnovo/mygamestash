@@ -1,3 +1,10 @@
+#Rest Api
+https://restapigames-production.up.railway.app/api/v1/games
+al final se puede poner games/users
+
+#Página desplegada
+https://mygamestash-juanjesusnovo.netlify.app/
+
 # base
 
 ## Project setup

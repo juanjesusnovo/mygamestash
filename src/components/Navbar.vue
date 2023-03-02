@@ -50,7 +50,6 @@
     </v-toolbar>
 </template>
 <script>
-import { loged, setLoged } from '@/loged/state';
 
 export default {
     name: "NavBar",
@@ -60,7 +59,7 @@ export default {
     data(){
     return {
         appTitle: 'MyGameStash',    
-        isLoged: loged,
+        isLoged: false,
         sidebar: false,
         menuItems: [
             { title: 'Pc Games', path: '/PcGames'},
@@ -81,7 +80,6 @@ export default {
             console.log(this.loged);
         },
         logout(){
-            setLoged()
             this.$router.push("/Login")
             console.log(this.loged);
         }

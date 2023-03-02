@@ -1,38 +1,48 @@
 <template>
-    <v-sheet width="300" class="mx-auto">
-        <v-form validate-on="submit" @submit.prevent="submit">
-            <v-text-field
-                v-model="name"
-                label="Name"
-                required
-            ></v-text-field>
-            <v-text-field
-                v-model="userName"
-                label="User Name"
-                required
-            ></v-text-field>
-            <v-text-field
-                v-model="email"
-                label="Email"
-                type="email"
-                required
-            ></v-text-field>
-            <v-text-field
-                v-model="password"
-                label="Password"
-                type="password"
-                required
-            ></v-text-field>
-            <v-text-field
-                v-model="checkPassword"
-                label="Repeat Password"
-                type="password"
-                required
-            ></v-text-field>
-            <v-btn type="submit" block class="mt-2">Submit</v-btn>
-            <v-btn @click="goLogin" block class="mt-2">Have Account? Login Here!</v-btn>
-        </v-form>
-    </v-sheet>
+    <div class="container">
+        <h1>Register Here!</h1>
+        <div class="form">
+            <v-sheet class="sheet">
+                <v-form validate-on="submit" @submit.prevent="submit" class="allInputs">
+                    <v-text-field
+                        class="input"
+                        v-model="name"
+                        label="Name"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        class="input"
+                        v-model="userName"
+                        label="User Name"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        class="input"
+                        v-model="email"
+                        label="Email"
+                        type="email"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        class="input"
+                        v-model="password"
+                        label="Password"
+                        type="password"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        class="input"
+                        v-model="checkPassword"
+                        label="Repeat Password"
+                        type="password"
+                        required
+                    ></v-text-field>
+                    <v-btn type="submit" block class="mt-2">Submit</v-btn>
+                    <v-btn @click="goLogin" block class="mt-2">Have Account? Login Here!</v-btn>
+                </v-form>
+            </v-sheet>
+        </div>
+    </div>
 </template>
 <script>
 import axios from 'axios';
@@ -78,3 +88,34 @@ import axios from 'axios';
         }
     }
 </script>
+<style>
+    .container{
+        min-height: 70vh;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    h1{
+        width: 100%;
+        text-align: center;
+    }
+    .form{
+        box-shadow: 2px 2px 10px;
+        width: 80%;
+        display: flex;
+        border-radius: 10px;
+        padding: 20px;
+    }
+    .sheet{
+        width: 100%;
+    }
+    .input{
+        width: 40%;
+        padding: 15px;
+    }
+    .allInputs{
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>

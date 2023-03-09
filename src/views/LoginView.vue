@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-        <h1>Login here!</h1>
-        <div class="form">
+    <div class="containerLogin">
+        <h1 class="Login">Login here!</h1>
+        <div class="formLogin">
             <v-sheet class="sheet">
                 <v-form validate-on="submit" @submit.prevent="submit" class="allInputs">
                     <div class="center">
@@ -17,17 +17,19 @@
                             type="password"
                         ></v-text-field>
                     </div>
-                    <div class="buttons">
+                    <div class="buttonsLogin">
                         <v-btn type="submit" block class="button">Submit</v-btn>
                         <v-btn @click="goRegister" block class="button">Don't Have Account? Register Here!</v-btn>
                     </div>
                 </v-form>
             </v-sheet>
-            <img src="@/assets/pngwing.com.png" class="imagen">
-            <div class="title">
-                <h2>My</h2>
-                <h2>Game</h2>
-                <h2>Stash</h2>
+            <div class="contenedor">
+                <img src="@/assets/pngwing.com.png" class="imagenLogin">
+                <div class="title">
+                    <h2 class="nameLogin">My</h2>
+                    <h2 class="nameLogin">Game</h2>
+                    <h2 class="nameLogin">Stash</h2>
+                </div>
             </div>
         </div>  
     </div>
@@ -40,21 +42,25 @@ import axios from 'axios';
             return{
                 userName: "",
                 password: "",
-                timeout: null,
-                loged: false,
+                timeout: null
             }
         },
         methods: {
             async submit () {
                 const checkApi =  async () => {
-                    await axios.get(`https://restapigames-production.up.railway.app/api/v1/users?userName=${this.userName}`)
+                    await axios.get(`http://localhost:3000/api/v1/users?userName=${this.userName}`)
                     .then(res => {
                         if(res === undefined){ return }
                         if(res.data.data[0].userName === this.userName && res.data.data[0].password === this.password){
-                            this.loged = true
+                            this.$store.commit("setUser", this.userName)
+                            this.$store.commit("setStash", res.data.data[0].stash)
+                            this.$store.commit("setLoged", true)
+                            this.$store.commit("setId", res.data.data[0].id)
+                            this.$router.push("/")
                         }
                     })
                 }
+                console.log(this.$store.state.isLoged)
                 checkApi()
             },
             goRegister(){
@@ -63,23 +69,23 @@ import axios from 'axios';
         }
     }
 </script>
-<style>
+<style scoped>
     @font-face {
         font-family: mario;
         src: url("@/assets/SuperMario256.ttf");
     }
-    .container{
+    .containerLogin{
         min-height: 70vh;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
     }
-    h1{
+    .Login{
         width: 100%;
         text-align: center;
     }
-    .form{
+    .formLogin{
         height: 50vh;
         box-shadow: 2px 2px 10px;
         width: 60%;
@@ -105,18 +111,25 @@ import axios from 'axios';
     .center{
         width: 50%;
     }
-    .buttons{
+    .buttonsLogin{
         width: 30%;
     }
     .button{
         margin: 20px;
     }
-    .imagen{
+    .imagenLogin{
         width: 300px;
         padding: 20px;
     }
-    h2{
+    .nameLogin{
         font-size: 40px;
         font-family: mario;
+    }
+    .contenedor{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
     }
 </style>

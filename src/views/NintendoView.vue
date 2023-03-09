@@ -15,7 +15,7 @@ export default {
     components: { GamesComponent }
     }
 </script>
-<style>
+<style scoped>
     .buttons{
         display: flex;
         justify-content: space-around;

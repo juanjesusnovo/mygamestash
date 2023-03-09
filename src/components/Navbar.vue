@@ -32,24 +32,25 @@
             </v-btn>
             <v-btn
                 flat
-                v-if="loged"
-                @click="logout">
-                LogOut
+                v-if="!$store.state.isLoged"
+                @click="goLogin">
+                Login
             </v-btn>
-            <v-btn 
+            <div v-else class="logout">
+                <v-btn
                 flat
-                v-else
-                @click="goLogin"
-                v-for="item in finallyLoged"
-                :key="item.title"
-                :to="item.path"
-            >
-                {{ item.title }}
-            </v-btn>
+                @click="goMyGames">My Games</v-btn>
+                <v-btn 
+                flat
+                @click="saveMyGames"
+                >Logout</v-btn>
+            </div>
         </v-toolbar-items>
     </v-toolbar>
 </template>
 <script>
+import axios from 'axios';
+
 
 export default {
     name: "NavBar",
@@ -59,7 +60,6 @@ export default {
     data(){
     return {
         appTitle: 'MyGameStash',    
-        isLoged: false,
         sidebar: false,
         menuItems: [
             { title: 'Pc Games', path: '/PcGames'},
@@ -67,21 +67,27 @@ export default {
             { title: 'PlayStation Games', path: '/PlayGames'},
             { title: 'Xbox Games', path: '/XboxGames'},
             { title: 'Filter Games', path: '/FilteredGames'},
-        ],
-        finallyLoged: [
-            /* { title: 'MyGames', path: '/MyGames'}, */
-            { title: 'Login', path: '/Login'},
         ]
     }
     },
     methods:{
         goLogin(){
             this.$router.push("/Login")
-            console.log(this.loged);
+            console.log(this.$store.state.currentUser)
         },
-        logout(){
+        goMyGames(){
+            this.$router.push("/MyGames")
+        },
+        saveMyGames(){
+            const updateStash = { stash: this.$store.state.currentStash }
+            const checkApi = async () => {
+                await axios.patch(`http://localhost:3000/api/v1/users/${this.$store.state.currentId}`, updateStash)
+                    .then(res => console.log(res))
+            }
+            checkApi()
             this.$router.push("/Login")
-            console.log(this.loged);
+            this.$store.commit("setLoged", false)
+            this.$store.commit("setLogout")
         }
     }
 };
@@ -89,5 +95,10 @@ export default {
 <style>
     .logo{
         width: 50px;
+    }
+    .logout{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 </style>

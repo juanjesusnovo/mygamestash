@@ -88,7 +88,7 @@ import axios from 'axios';
         }
     }
 </script>
-<style>
+<style scoped>
     .container{
         min-height: 70vh;
         display: flex;

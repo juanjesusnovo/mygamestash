@@ -1,4 +1,5 @@
 // Composables
+import store from '@/store/store'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -45,14 +46,31 @@ const routes = [
         path: "/Register",
         name: "Register",
         component: () => import("@/views/RegisterView.vue")
+      },
+      {
+        path: "/MyGames",
+        name: "MyGames",
+        component: () => import("@/views/MyGames.vue"),
+        meta: {
+          requiresLoged: true
+        }
       }
-    ],
-  },
+    ]
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const isLoged = store.state.isLoged
+  const requiresLoged = to.matched.some((record) => record.meta.requiresLoged)
+  if(requiresLoged && !isLoged) {
+    next("/Login")
+  }
+  else{ next() }
 })
 
 export default router

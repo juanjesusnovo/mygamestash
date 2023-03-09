@@ -27,6 +27,10 @@
                 <h3 class="title">This game is available in: </h3>
                 <img class="platform" v-for="(image, i) in game.platforms" :key="i" :src="image"/>
             </div>
+            <div v-if="$store.state.isLoged">
+                <button v-if="$store.state.currentStash.includes(game.id)" class="buttonRemove" @click="favs(game.id)">Remove</button>
+                <button v-else class="buttonAdd" @click="favs(game.id)">Add</button>
+            </div>
         </v-card>
     </div>  
     <div class="buttons">
@@ -59,7 +63,7 @@ export default {
                 this.number += 32
                 this.loaded = false
                 this.games = []
-                if(getGames(this.games, `games?platforms=https://cdn-icons-png.flaticon.com/512/871/871510.png`, this.number)){
+                if(getGames(this.games, `games?platforms=${this.platform}`, this.number)){
                     this.loaded=true
                 }
                 window.scrollTo(0,0)
@@ -69,10 +73,13 @@ export default {
             this.number -= 32
             this.games = []
             this.loaded = false
-            if(getGames(this.games, `games?platforms=https://cdn-icons-png.flaticon.com/512/871/871510.png`, this.number)){
+            if(getGames(this.games, `games?platforms=${this.platform}`, this.number)){
                 this.loaded=true
             }
             window.scrollTo(0,0)
+        },
+        favs(id){
+            this.$store.commit("addGame", id)
         }
     }
 }
@@ -191,5 +198,73 @@ export default {
     }
     .container{
         min-height: 80vh;
+    }
+    .buttonRemove{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .buttonAdd{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .buttonRemove:hover{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: rgb(184, 69, 69);
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .buttonAdd:hover{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: rgb(95, 187, 67);
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
     }
 </style>

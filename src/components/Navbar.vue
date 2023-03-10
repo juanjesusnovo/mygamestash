@@ -36,15 +36,16 @@
                 @click="goLogin">
                 Login
             </v-btn>
-            <div v-else class="logout">
+            <v-toolbar-items v-else class="logout">
                 <v-btn
                 flat
-                @click="goMyGames">My Games</v-btn>
+                @click="goMyGames"
+                >My Games</v-btn>
                 <v-btn 
                 flat
                 @click="saveMyGames"
                 >Logout</v-btn>
-            </div>
+            </v-toolbar-items>
         </v-toolbar-items>
     </v-toolbar>
 </template>
@@ -100,5 +101,8 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .logout span{
+        width: 100%;
     }
 </style>

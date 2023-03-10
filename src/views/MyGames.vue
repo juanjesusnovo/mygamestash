@@ -25,6 +25,10 @@
                     <h3 class="title">This game is available in: </h3>
                     <img class="platform" v-for="(image, i) in game.platforms" :key="i" :src="image"/>
                 </div>
+                <div v-if="$store.state.isLoged">
+                    <button v-if="$store.state.currentStash.includes(game.id)" class="buttonRemove" @click="favs(game.id)">Remove</button>
+                    <button v-else class="buttonAdd" @click="favs(game.id)">Add</button>
+                </div>
             </v-card>
         </div>
         <div v-else>
@@ -60,6 +64,12 @@ export default{
             loaded: false,
             games: []
         }
+    },
+    methods: {
+        favs(id){
+            this.$store.commit("addGame", id)
+            location.reload()
+        }
     }
 }
 </script>
@@ -88,5 +98,73 @@ export default{
         padding: 2.5px;
         margin: 4px;
         border-radius: 7px;
+    }
+    .buttonRemove{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .buttonAdd{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .buttonRemove:hover{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: rgb(184, 69, 69);
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .buttonAdd:hover{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-height: 30px;
+        border-radius: 4px;
+        background-color: rgb(95, 187, 67);
+        box-shadow: 2px 2px 10px;
+        border: none;
+        color: black;
+        text-align: center;
+        font-size: 20px;
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        margin: 5px;
     }
 </style>

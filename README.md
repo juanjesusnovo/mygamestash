@@ -1,9 +1,9 @@
 # Rest Api
-//
+https://restapigames-production-9b22.up.railway.app/api/v1/games
 al final se puede poner games/users
 
 # Página desplegada
-//
+https://proyectovuejjnovo.netlify.app/
 
 # base
 

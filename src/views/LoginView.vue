@@ -48,7 +48,7 @@ import axios from 'axios';
         methods: {
             async submit () {
                 const checkApi =  async () => {
-                    await axios.get(`http://localhost:3000/api/v1/users?userName=${this.userName}`)
+                    await axios.get(`https://restapigames-production-9b22.up.railway.app/api/v1/users?userName=${this.userName}`)
                     .then(res => {
                         if(res === undefined){ return }
                         if(res.data.data[0].userName === this.userName && res.data.data[0].password === this.password){

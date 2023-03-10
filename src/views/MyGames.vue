@@ -42,7 +42,7 @@ export default{
     created(){
         this.loaded = this.$store.state.currentStash.forEach(id => {
         const getData = async () => {
-            await axios.get(`http://localhost:3000/api/v1/games/${id}`)
+            await axios.get(`https://restapigames-production-9b22.up.railway.app/api/v1/games/${id}`)
             .then(res => {
             if(res == undefined){
                 throw new Error("Error getting data from api")

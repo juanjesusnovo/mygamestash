@@ -81,7 +81,7 @@ export default {
         saveMyGames(){
             const updateStash = { stash: this.$store.state.currentStash }
             const checkApi = async () => {
-                await axios.patch(`http://localhost:3000/api/v1/users/${this.$store.state.currentId}`, updateStash)
+                await axios.patch(`https://restapigames-production-9b22.up.railway.app/api/v1/users/${this.$store.state.currentId}`, updateStash)
                     .then(res => console.log(res))
             }
             checkApi()

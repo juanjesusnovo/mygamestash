@@ -1,5 +1,5 @@
 import axios from "axios"
-const api = "http://localhost:3000/api/v1/"
+const api = "https://restapigames-production-9b22.up.railway.app/api/v1/"
 
 
 export function reload() {
